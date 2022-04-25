@@ -193,7 +193,17 @@ const mockData = {
       };
 
       const pageHTML = generatePage(mockData);
-      fs.writeFile("./index.html", pageHTML, err => {
-          if (err) throw new Error(err);
-              console.log("Portfolio complete! Checkout index.html to see the output");
+      fs.writeFile("./dist/index.html", pageHTML, err => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        console.log("Page created in dist folder");
+       fs.copyFile("./src/style.css", "./dist/style.css", err => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log("Style sheet copied");
+        });  
       });
